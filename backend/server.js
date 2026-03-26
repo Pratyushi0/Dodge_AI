@@ -19,7 +19,10 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 // FIXED: was "gemini-pro" (deprecated) -> now "gemini-2.5-flash"
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : "*",
+  credentials: true
+}));
 app.use(express.json());
 
 const SYSTEM_PROMPT = `You are an Order-to-Cash (O2C) data analyst AI assistant.

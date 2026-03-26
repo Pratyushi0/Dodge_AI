@@ -1,0 +1,17 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "services": [
+    {
+      "name": "backend",
+      "rootDirectory": "backend",
+      "buildCommand": "npm install",
+      "startCommand": "npm start"
+    },
+    {
+      "name": "frontend",
+      "rootDirectory": "frontend",
+      "buildCommand": "npm install && npm run build",
+      "startCommand": "npx serve -s build -l $PORT"
+    }
+  ]
+}
