@@ -1,7 +1,7 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { initDB } = require('./db');
 const { runQuery, QUERY_CATALOG } = require('./queryEngine');
