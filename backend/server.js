@@ -1,4 +1,5 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 const express = require('express');
 const cors = require('cors');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
@@ -144,6 +145,13 @@ function extractHighlightIds(queryName, result) {
   }
   return Array.from(ids);
 }
+
+// ─── Serve React frontend in production ───────────────────────────────────────
+const frontendBuild = path.join(__dirname, '..', 'frontend', 'build');
+app.use(express.static(frontendBuild));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendBuild, 'index.html'));
+});
 
 app.listen(port, "0.0.0.0", () => {
   console.log(`\n🚀 O2C Graph API running on port ${port}`);
